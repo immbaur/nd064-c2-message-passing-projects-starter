@@ -35,6 +35,10 @@ Vagrant.configure("2") do |config|
       sudo zypper --non-interactive install apparmor-parser
       curl -sfL https://get.k3s.io | sh -
     SHELL
+
+    config.ssh.insert_key = false
+    config.ssh.username = "vagrant"
+    config.ssh.password = "vagrant"
   end
 
 
