@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service: udaconnect-locations-ingestion
+  name: udaconnect-locations-ingestion
+spec:
+  ports:
+  - name: "5005"
+    port: 5005
+    targetPort: 5005
+    nodePort: 30005
+  selector:
+    service: udaconnect-locations-ingestion
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: udaconnect-locations-ingestion
+  name: udaconnect-locations-ingestion
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: udaconnect-locations-ingestion
+  template:
+    metadata:
+      labels:
+        service: udaconnect-locations-ingestion
+    spec:
+      containers:
+      - image: immbaur/nd064-udaconnect-locations-ingestion:latest
+        name: udaconnect-locations-ingestion
+        imagePullPolicy: Always
