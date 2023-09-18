@@ -1,0 +1,131 @@
+openapi: 3.0.0
+info:
+  title: Persons API
+  description: Manage person records
+  version: 1.0.0
+paths:
+  /persons:
+    post:
+      summary: Create a New Person
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonSchema'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonSchema'
+        '400':
+          description: Bad Request
+    get:
+      summary: Retrieve All Persons
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PersonSchema'
+  /persons/{person_id}:
+    get:
+      summary: Retrieve a Person by ID
+      parameters:
+        - name: person_id
+          in: path
+          required: true
+          description: Unique ID for the person
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonSchema'
+        '404':
+          description: Not Found
+  /persons/{person_id}/connection:
+    get:
+      summary: Retrieve Connection Data
+      parameters:
+        - name: person_id
+          in: path
+          required: true
+          description: Unique ID of the person.
+          schema:
+            type: integer
+        - name: start_date
+          in: query
+          required: true
+          description: Lower bound of the date range.
+          schema:
+            type: string
+        - name: end_date
+          in: query
+          required: true
+          description: Upper bound of the date range.
+          schema:
+            type: string
+        - name: distance
+          in: query
+          description: Proximity to a given user in meters.
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectionSchema'
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+          
+components:
+  schemas:
+    PersonSchema:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Person ID
+        first_name:
+          type: string
+          description: First Name of the person
+        last_name:
+          type: string
+          description: Last Name of the person
+        company_name:
+          type: string
+          description: Company Name associated with the person
+      required:
+        - id
+        - first_name
+        - last_name
+        - company_name
+    ConnectionSchema:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique ID of the connection.
+        person_id:
+          type: integer
+          description: ID of the connected person.
+        connection_date:
+          type: string
+          description: Date of the connection.
+        distance_meters:
+          type: integer
+          description: Proximity to the connected person in meters.
+          

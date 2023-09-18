@@ -13,6 +13,7 @@ import psycopg2
 
 KAFKA_TOPIC = "location"
 KAFKA_BROKER_URL = "kafka-service:9092"
+KAFKA_GROUP_ID = "udaconnect"
 
 # Configure logging to stdout
 logger = logging.getLogger("my-logger")
@@ -59,14 +60,14 @@ def add_location(location):
 
 def consume_topic():
     
-    consumer = KafkaConsumer(KAFKA_TOPIC, group_id='udaconnect', bootstrap_servers=KAFKA_BROKER_URL)
+    consumer = KafkaConsumer(KAFKA_TOPIC, group_id=KAFKA_GROUP_ID, bootstrap_servers=KAFKA_BROKER_URL)
     for message in consumer:
         logger.info(message)
         try:
             value = message.value.decode('utf-8')
-            logger.info(value)
+            # logger.info(value)
             mess = json.loads(value)
-            logger.info(mess)
+            # logger.info(mess)
             add_location(mess)
 
             #LocationService.create(mess)
@@ -79,29 +80,15 @@ def consume_topic():
             logger.error(f"An unexpected error occurred: {e}")
 
 if __name__ == '__main__':
-    logger.info("Starting the Kafka consumer service")
-    location = {
-        "person_id": 5,
-        "creation_time": "2021-04-01T12:00:00Z",
-        "latitude": 123,
-        "longitude": 123
-    }
-    add_location(location)
-
+    logger.info("Starting the locations service")
+    # location = {
+    #     "person_id": 5,
+    #     "creation_time": "2021-04-01T12:00:00Z",
+    #     "latitude": 123,
+    #     "longitude": 123
+    # }
+    # add_location(location)
 
     while True:
         consume_topic()
         time.sleep(1/100)
-
-
-# location = {
-#     "person_id": 3,
-#     "latitude": 123,
-#     "longitude": 123
-# }
-
-# ser = json.dumps(location).encode('utf-8')
-
-# mess = json.loads(ser.decode('utf-8'))
-# print(mess)
-# LocationService.create(mess)

@@ -93,8 +93,8 @@ Once the project is up and running, you should be able to see 3 deployments and 
 
 
 These pages should also load on your web browser:
-* `http://localhost:30001/` - OpenAPI Documentation
-* `http://localhost:30001/api/` - Base path for API
+* `http://localhost:30004/` - OpenAPI Documentation
+* `http://localhost:30004/api/` - Base path for API
 * `http://localhost:30000/` - Frontend ReactJS Application
 
 #### Deployment Note
@@ -150,3 +150,9 @@ Your architecture diagram should focus on the services and how they talk to one 
 ## Tips
 * We can access a running Docker container using `kubectl exec -it <pod_id> sh`. From there, we can `curl` an endpoint to debug network issues.
 * The starter project uses Python Flask. Flask doesn't work well with `asyncio` out-of-the-box. Consider using `multiprocessing` to create threads for asynchronous behavior in a standard Flask application.
+
+#### Steps to run the final project
+* Initialize K3s as described in above chapter
+* Set up `kubectl` as described in above chapter
+* clone this project
+* run kubectl apply -f deployment/

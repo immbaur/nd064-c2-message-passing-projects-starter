@@ -9,5 +9,4 @@ RUN pip install -r requirements.txt
 EXPOSE 5005
 
 COPY . .
-# CMD ["python3", "test.py"]
-CMD ["python3", "main.py"]
+CMD ["python3", "app/udaconnect/main.py"]

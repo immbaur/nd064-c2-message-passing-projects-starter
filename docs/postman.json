@@ -1,0 +1,120 @@
+{
+	"info": {
+		"_postman_id": "e09445b8-2df4-4b86-8a95-2e77157db331",
+		"name": "UdaConnect",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4456787"
+	},
+	"item": [
+		{
+			"name": "Retrieve All Persons",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:30004/api/persons",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "30004",
+					"path": [
+						"api",
+						"persons"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve a Person by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:30004/api/persons/9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "30004",
+					"path": [
+						"api",
+						"persons",
+						"9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a New Person",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"id\": 10, \"first_name\": \"Hans\", \"last_name\": \"Mueller\", \"company_name\": \"Mercedes-Benz\"}\n"
+				},
+				"url": {
+					"raw": "http://localhost:30004/api/persons",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "30004",
+					"path": [
+						"api",
+						"persons"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve Connection Data",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:30002/api/persons/9/connection?start_date=2020-01-01&end_date=2020-12-30&distance=5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "30002",
+					"path": [
+						"api",
+						"persons",
+						"9",
+						"connection"
+					],
+					"query": [
+						{
+							"key": "start_date",
+							"value": "2020-01-01",
+							"description": "Lower bound of date range"
+						},
+						{
+							"key": "end_date",
+							"value": "2020-12-30",
+							"description": "Upper bound of date range"
+						},
+						{
+							"key": "distance",
+							"value": "5",
+							"description": "Proximity to a given user in meters"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

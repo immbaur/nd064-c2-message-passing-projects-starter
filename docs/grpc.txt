@@ -1,0 +1,14 @@
+The gRPC interface defines a service called LocationService with a single method "Create", which takes a LocationMessage as input and returns a LocationMessage.
+
+message LocationMessage {
+    int32 person_id = 1;
+    string creation_time = 2;
+    string latitude = 3;
+    string longitude = 4;
+}
+
+service LocationService {
+    rpc Create(LocationMessage) returns (LocationMessage);
+}
+
+The inteface can be tested using the the python script in modules/locations-ingestion/app/udaconnect/writer.py

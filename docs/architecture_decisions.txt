@@ -1,0 +1,3 @@
+Message passing strategies:
+When the number of users increases the locations service is receiving a signiticant amoutn of location data traffic from users mobile devices. Hence, integrating gRPC messaging coupled with asynchronous message passing via Kafka would facilitate a smoother processing and interaction with the Postgres database. 
+In contrast, the connections service and persons service have fewer API requests. For these, designin a RESTful API is sufficient and would be preferred as it offers a lower level of complexity
